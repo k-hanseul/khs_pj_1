@@ -3,7 +3,7 @@ li {
 }
 
 .menu_bar {
-    background-color: rgb(73, 84, 100);
+    background-color: #474747;
     border-bottom: 2px solid black;
     justify-content: flex-start;
     /* display: flex; */
@@ -43,7 +43,7 @@ li {
 }
 
 .menu_item {
-    color: black;
+    color: rgb(255, 255, 255);
     font-size: 35px;
     align-items: center;
     @media (max-width: 800px) {
