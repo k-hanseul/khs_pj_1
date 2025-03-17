@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import style from './infoStyle.module.css'
+import style from './InfoStyle.module.css'
 
 function Info() {
 
     const [detailLiStates, setDetailLiStates] = useState({});
     const handleShowDetail = (index) => {
+        console.log("#### handleShowDetail index: " + index);
         setDetailLiStates((prev) => ({
             ...prev,
             [index]: !prev[index],
@@ -26,8 +27,8 @@ function Info() {
         }
     ];
 
-
     return (
+        
         <section className={style.info} bgcolor="#F4F4F2">
             <div className={style.info_section_t1}>
                 <img className={style.profile_img} src={'img/seul_.jpg'} alt="profile_img" />
