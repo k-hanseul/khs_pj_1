@@ -1,6 +1,16 @@
+.album {
+    /* width: 100vw; */
+    width: 80vw;
+    height: 100vh;
+    margin: auto;
+    /* background-color: #F4F4F2; */
+    /* #f5f5f5; */
+}
+
 .photo_section_t1 {
     /* background-color: rgb(91, 119, 161); */
-    width: 85%;
+    /* width: 85%; */
+    width: 100%;
     padding: 70px 0 70px 0;
     display: inline-grid;
     justify-items: center;

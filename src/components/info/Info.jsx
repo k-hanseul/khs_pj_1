@@ -2,34 +2,36 @@ import React, { useState } from 'react'
 import style from './InfoStyle.module.css'
 
 function Info() {
-
-    const [detailLiStates, setDetailLiStates] = useState({});
-    const handleShowDetail = (index) => {
-        console.log("#### handleShowDetail index: " + index);
-        setDetailLiStates((prev) => ({
-            ...prev,
-            [index]: !prev[index],
-        }));
-    };
-
     const introductions = [
         {
-            isOpen: true,
             title: "[성장 과정]",
             text:
                 "게임 업계에서의 시작은 QA 업무였습니다. 테스트를 진행하며 자연스럽게 개발자들과 협업할 기회가 많았고, 그들이 코드를 통해 게임을 구현하는 과정에 흥미를 느끼게 되었습니다.\n퇴사 후 게임 개발 학원에서 프로그래밍을 배우며 본격적으로 게임 개발을 시작했습니다. 처음에는 작은 기능 하나를 구현하는 것도 쉽지 않았지만, 디버깅을 통해 문제를 해결하며 점점 더 복잡한 시스템을 만들어 갈 수 있었습니다. 그렇게 게임이 완성되는 과정에서 개발의 즐거움과 성취감을 느꼈습니다.\n학원 수료 후 게임 프로그래머로 근무하며 직접 구현한 게임이 서비스되어 유저들에게 재미를 준다는 점에서 보람을 느꼈습니다.\n지금은 이직을 준비하는 단계이지만, 게임을 만들어가며 느끼는 즐거움과 보람을 계속 이어가고 싶습니다. 앞으로도 더욱 발전된 기술을 익히고, 더 나은 게임을 만드는 개발자가 되기 위해 끊임없이 노력하겠습니다."
         },
         {
-            isOpen: true,
             title: "[성격]",
             text:
                 "저는 타인의 의견을 잘 수렴하는 성격을 가지고 있습니다. 팀원들의 다양한 의견을 받아들이며, 이를 바탕으로 더 나은 방향을 모색하고 부족한 부분을 보완하는 데 노력합니다. 협업이 중요한 게임 개발 과정에서 이러한 성향은 원활한 소통과 문제 해결에 도움이 된다고 생각합니다.\n하지만 세심하지 못한 면이 있어 업무 진행 중 큰 틀을 해결하며 사소한 부분을 놓치는 경우가 있습니다. 이를 보완하기 위해 미리 체크해야 할 사항과 과거 문제 해결 방식을 정리해 두고, 잊지 않도록 눈에 보이는 곳에 배치하는 습관을 기르고 있습니다."
         }
     ];
 
+    const getListState = () => {
+        var states = introductions.fill(true);
+        console.log("#### getListState states: " + JSON.stringify(states));
+        return states;
+    };
+
+    const [listState, setListState] = useState(getListState);
+    
+    const handleShowDetail = (index) => {
+        listState[index] = !listState[index];
+        setListState([...listState]);
+        console.log("#### handleShowDetail index: " + index + " / listState: " + JSON.stringify(listState));
+    };
+
     return (
-        
-        <div className={style.info} bgcolor="#F4F4F2">
+
+        <div className={style.info}>
             <div className={style.info_section_t1}>
                 <img className={style.profile_img} src={'img/seul_.jpg'} alt="profile_img" />
                 <div className={style.profile_list}>
@@ -68,10 +70,12 @@ function Info() {
             <div className={style.info_section_t2}>
                 {introductions.map((list, index) => (
                     <li key={index}>
+                        {/* <div className={style.introduction_title} onClick={""}> */}
                         <div className={style.introduction_title} onClick={() => handleShowDetail(index)}>
-                            {list.title} {detailLiStates[index] ? '▲' : '▼'}
-                        </div>
-                        {detailLiStates[index] && (
+                            {/* {list.title} {listState[index] ? '▲' : '▼'} */}
+                            {list.title} {listState[index] ? '▲' : '▼'}
+                        </div>                        
+                        {listState[index] && (
                             <div className={style.introduction_text} >
                                 {list.text}
                             </div>
@@ -80,9 +84,12 @@ function Info() {
                     </li>
                 ))}
             </div>
+
             <div className={style.info_line}></div>
+
             <div className={style.info_section_t2}>
                 <div className={style.section_title}>교육</div>
+                <br></br>
                 {/* <div className={style.content_list}> */}
                 <div className={style.content_box}>동서울대학교 | 게임 콘텐츠 학과 (2013.3 - 2015.2)</div>
                 <br></br>

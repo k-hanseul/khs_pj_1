@@ -38,7 +38,7 @@ function Album() {
   }, [currPage]);
 
   return (
-    <div>
+    <div className={style.album}>
       {
         getPhotoList() > 0 ?
           <div className={style.photo_section_t1}>
