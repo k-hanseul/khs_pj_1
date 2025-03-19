@@ -29,7 +29,7 @@ function Info() {
 
     return (
         
-        <section className={style.info} bgcolor="#F4F4F2">
+        <div className={style.info} bgcolor="#F4F4F2">
             <div className={style.info_section_t1}>
                 <img className={style.profile_img} src={'img/seul_.jpg'} alt="profile_img" />
                 <div className={style.profile_list}>
@@ -185,7 +185,7 @@ function Info() {
                     </p>
                 </div>
             </div>
-        </section>
+        </div>
     )
 }
 
