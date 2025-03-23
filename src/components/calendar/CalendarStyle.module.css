@@ -1,65 +1,109 @@
-.calendar {
-    /* width: 100vw; */
-    width: 80vw;
+.calendar {    
+    width: 95vw;
     margin: auto;
-    /* background-color: #F4F4F2; */
-    /* #f5f5f5; */
+    display: flex;
 }
 
 .calendar_section_t1 {
-    /* background-color: rgb(91, 119, 161); */
-    /* width: 85%; */
-    width: 80vw;
+    width: 60%;
     margin: auto;
-
-    /* width: 100%; */
-    padding: 70px 0 70px 0;
-    display: inline-grid;
+    
+    padding: 50px 0 50px 0;    
     justify-items: center;
     align-items: center;
 }
 
 .calendar_header {
+    width: 30%;
+    height: 50px;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
+    border: double 10px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+
+    font-size: 25px;
+    font-weight: bold;
 }
 
 .calendar_week {
-    display: flex;    
+    width: 100%;
+    display: grid;    
+    grid-template-columns: repeat(8, 12%);
     justify-content: center;
-    padding: 10px;
-
-    .col {
-        width: 150px;
-        height: 50px;
-        margin: 10px;
+   
+    .item {
+        height: 45px;        
         font-size: 20px;
-        color: rgb(255, 255, 255);
-        background-color: rgb(68, 68, 68);
-        /* border-radius: 10px; */
-        /* border: 2px solid rgba(100, 100, 100, .5); */
-        border-radius: 15px;
+        font-weight: bold;
         align-content: center;
-
+        border-top: 2px solid rgb(68, 68, 68);
+        border-bottom: 2px solid rgb(68, 68, 68);
     }
 }
 
 .calendar_day {
+    width: 100%;
     display: grid;    
+    grid-template-columns: repeat(8, 12%);
     justify-content: center;
     padding: 10px;
-    grid-template-columns: repeat(8, 150px);
 
-    .col {
-        width: 150px;
-        height: 50px;
-        margin: 10px;
-        font-size: 20px;
-        color: rgb(255, 255, 255);
-        background-color: rgb(68, 68, 68);
-        /* border-radius: 10px; */
-        /* border: 2px solid rgba(100, 100, 100, .5); */
-        border-radius: 15px;
-        align-content: center;
+    .item {                
+        height: 75px;
+        padding: 5px;
+        font-size: 18px;
+        background:white;
+        box-shadow:0 0 0 2px rgb(68, 68, 68);      
+        text-align: left;  
+    }
+}
+
+.calendar_section_t2 {
+    /* background-color: rgb(161, 145, 91);
+    width: 40%;
+    margin: auto;
+height: 100%;
+    padding: 50px 0 50px 0;    
+    display: inline-grid;
+    justify-items: center;
+    align-items: center; */
+
+    width: 40%;
+    margin: auto;
+    
+    padding: 50px 0 50px 0;    
+    justify-items: center;
+    align-items: center;
+
+    .title {
+        font-size: 25px;
+        font-weight: bold;
+    }
+    
+
+    .todo {
+        width: 100%;
+        height: 50%;
+        border: 2px solid black;
+
+
+        .check {
+
+        }
+
+        .text {
+            
+        }
+    }
+
+    .memo {
+        width: 100%;
+        height: 50%;
+        border: 2px solid black;
 
     }
 }
