@@ -30,7 +30,6 @@ function Info() {
     };
 
     return (
-
         <div className={style.info}>
             <div className={style.info_section_t1}>
                 <img className={style.profile_img} src={'img/seul_.jpg'} alt="profile_img" />
