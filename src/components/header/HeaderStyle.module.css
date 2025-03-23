@@ -46,6 +46,7 @@ li {
     color: rgb(255, 255, 255);
     font-size: 35px;
     align-items: center;
+    
     @media (max-width: 800px) {
         font-size: 15px;
     }

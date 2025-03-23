@@ -2,6 +2,7 @@ import React, { useState, useEffect, useLayoutEffect } from 'react'
 import style from './CalendarStyle.module.css'
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek, format, addDays, isSaturday, isSunday, addMonths, subMonths } from "date-fns";
 import { FaCaretLeft, FaCaretRight } from "react-icons/fa6";
+import { IoIosArrowDroprightCircle, IoMdSquareOutline, IoMdCheckbox, IoMdCreate, IoMdClose } from "react-icons/io";
 
 
 const RenderDay = ({ currDate }) => {
@@ -19,6 +20,8 @@ const RenderDay = ({ currDate }) => {
 
     while (startDay <= endDay) {
         for (let i = 0; i < 8; i++) {
+                                // const dayStatus = day ? getTodoStatus(year, month, day) : "";
+
             daysInWeek.push(
                 <div className={style.item} style={{
                     color: format(currDate, "M") !== format(startDay, "M")
@@ -52,17 +55,23 @@ function Calendar() {
     const [currDate, setCurrDate] = useState(new Date());
     const week = ["*", "월", "화", "수", "목", "금", "토", "일"];
 
-    const handlePrevMonth = () => {
-        // 이전 달로 이동
-        setCurrDate(subMonths(currDate, 1));
+    const handleClickDate = (day) => {
+        // if (day !== null) {
+        //     const newDate = new Date(year, month, day);
+        //     setCurrDate(newDate);
+        // }
+    };
 
+    const handlePrevMonth = () => {
+        setCurrDate(subMonths(currDate, 1));
     };
 
     const handleNextMonth = () => {
-        // 다음 달로 이동
         setCurrDate(addMonths(currDate, 1));
-
     };
+
+    const [todoList, setTodoList] = useState([]);
+
 
     return (
         <div className={style.calendar}>
@@ -86,6 +95,7 @@ function Calendar() {
 
                 <RenderDay
                     currDate={currDate}
+                    onClick={handleClickDate}
                 />
 
             </div>
@@ -94,8 +104,17 @@ function Calendar() {
                     {format(currDate, "yyyy")}. {format(currDate, "M")}. {format(currDate, "dd")}
                 </div>
                 <div className={style.todo}>
+                    <div className={style.todo_title}>TodoList</div>
+                    <div className={style.list}></div>
+
+                    <div className={style.create}>
+                    <input className={style.create_input}></input>                                    
+                    <IoIosArrowDroprightCircle className={style.create_btn} onClick={""}></IoIosArrowDroprightCircle>
+                    </div>
+
                 </div>
                 <div className={style.memo}>
+                    <div className={style.memo_title}>Memo</div>
                 </div>
             </div>
         </div>
