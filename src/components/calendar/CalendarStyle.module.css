@@ -59,6 +59,7 @@
         background: white;
         box-shadow: 0 0 0 2px rgb(68, 68, 68);
         text-align: left;
+        display: grid;        
     }
 }
 
@@ -149,15 +150,40 @@
         width: 95%;
         height: 300px;
         border: 2px solid black;
-        /* padding: 10px; */
         box-sizing: border-box;
         padding: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
 
         .memo_title {
             text-align: left;
             font-size: 22px;
             font-weight: bold;
+            padding-bottom: 5px;
 
         }
+
+        .memo_text {}
+
+        .memo_edit {
+            padding: 10px;
+            width: 100%;
+            height: 90%;
+            border: 1px dashed #333;
+            border-radius: 20px;
+            box-sizing: border-box;
+            background: none;
+            font-size: 15px;
+            line-height: 2;
+            font-family: inherit;
+            text-decoration: #333 2px underline;
+            text-underline-position: under;
+        }
+
+        /* textarea::placeholder {
+            font-family: 'SUITE-Regular';
+            color: rgb(255, 215, 222);            
+        } */
     }
 }

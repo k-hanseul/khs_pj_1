@@ -5,7 +5,7 @@ import { FaCaretLeft, FaCaretRight } from "react-icons/fa6";
 import { IoIosArrowDroprightCircle, IoMdSquareOutline, IoMdCheckbox, IoMdCreate, IoMdClose } from "react-icons/io";
 
 
-const RenderDay = ({ currDate }) => {
+const RenderDay = ({ currDate, handleClickDate }) => {
 
     const startCurrMonth = startOfMonth(currDate);
     const endCurrMonth = endOfMonth(currDate);
@@ -18,22 +18,39 @@ const RenderDay = ({ currDate }) => {
     var daysInMonth = [];
     var daysInWeek = [];
 
+    function isDayMemo(date) {
+        let key = "MEMO_" + format(date, 'yyyy-MM-dd');
+        const localMemo = localStorage.getItem(key);
+        // console.log("#### getMemo key: " + key + " / localMemo: " + localMemo);
+        return localMemo ? true : false;
+    }
+
     while (startDay <= endDay) {
         for (let i = 0; i < 8; i++) {
-                                // const dayStatus = day ? getTodoStatus(year, month, day) : "";
-
+            let date = '';
+            if (i === 0) date = format(startDay, 'yyyy-MM') + "-w" + (daysInMonth.length + 1);
+            else date = format(startDay, 'yyyy-MM-dd');
+            // console.log("### " + format(startDay, 'yyyy-MM-dd') + " / " + format(currDate, 'yyyy-MM-dd'));
             daysInWeek.push(
                 <div className={style.item} style={{
-                    color: format(currDate, "M") !== format(startDay, "M")
-                        ? "#ddd"
-                        : isSunday(startDay)
-                            ? "red"
-                            : isSaturday(startDay)
-                                ? "blue"
-                                : "#000",
-                }} key={i}>
-                    {i !== 0 ? format(startDay, 'dd') : ''}
-
+                    backgroundColor: i !== 0 && format(startDay, 'yyyy-MM-dd') === format(currDate, 'yyyy-MM-dd') && "moccasin"
+                }} key={date} onClick={() => i !== 0 && handleClickDate(date)}>
+                    {/* }} key={date} onClick={function() {
+                    // if (format(currDate, "M") !== format(startDay, "M")) console.log("#### 1111");
+                    // else console.log("#### 2222");
+                    console.log("### " + format(date, "M") + " / " + format(currDate, "M"));
+                    // console.log("### date: " + date);
+                }}> */}
+                    <div style={{
+                        color: format(currDate, "M") !== format(startDay, "M")
+                            ? "#ddd"
+                            : isSunday(startDay)
+                                ? "red"
+                                : isSaturday(startDay)
+                                    ? "blue"
+                                    : "#000"
+                    }}>{i !== 0 ? format(startDay, 'dd') : ''}</div>
+                    <div>{i !== 0 && isDayMemo(date) ? 'Todo' : ''}</div>
                 </div>
             )
             if (i !== 0) startDay = addDays(startDay, 1);
@@ -56,10 +73,8 @@ function Calendar() {
     const week = ["*", "월", "화", "수", "목", "금", "토", "일"];
 
     const handleClickDate = (day) => {
-        // if (day !== null) {
-        //     const newDate = new Date(year, month, day);
-        //     setCurrDate(newDate);
-        // }
+        if (format(currDate, "M") !== format(day, "M")) return;
+        setCurrDate(day);
     };
 
     const handlePrevMonth = () => {
@@ -70,8 +85,45 @@ function Calendar() {
         setCurrDate(addMonths(currDate, 1));
     };
 
-    const [todoList, setTodoList] = useState([]);
+    const TODO_KEY = "TODO_" + format(currDate, 'yyyy-MM-dd');
+    const [currTodo, setCurrTodo] = useState(initTodo);
+    function initTodo() {
+        let todos = [];
+        const localTodo = localStorage.getItem(TODO_KEY);
+        if (localTodo) todos = JSON.parse(localTodo);
+        return todos;
+    }
 
+    const MEMO_KEY = "MEMO_" + format(currDate, 'yyyy-MM-dd');
+    const [currMemo, setCurrMemo] = useState('');
+    function getMemo() {
+        let m = '';
+        const localMemo = localStorage.getItem(MEMO_KEY);
+        if (localMemo) m = localMemo;
+        setCurrMemo(m);
+        // console.log("#### getMemo MEMO_KEY: " + MEMO_KEY + " / m: " + m + " / currMemo: " + currMemo);
+    }
+
+    function handleEditMemo(e) {
+        var m = e.target.value;
+        if (currMemo !== m) {
+            if (m === undefined || m === null || m === 0 || m === '' || !m.replace(/\s/g, '').length) {
+                // console.log("#### handleEditMemo 11");
+                localStorage.removeItem(MEMO_KEY);
+            }
+            else {
+                // console.log("#### handleEditMemo 22");
+                localStorage.setItem(MEMO_KEY, m);
+            }
+        }
+        setCurrMemo(m);
+        // console.log("#### handleEditMemo MEMO_KEY: " + MEMO_KEY + " / m: " + m + " / currMemo: " + currMemo);
+    }
+
+    useEffect(() => {
+        // console.log("#### useEffect currDate: " + currDate);
+        getMemo();
+    }, [currDate]);
 
     return (
         <div className={style.calendar}>
@@ -95,7 +147,7 @@ function Calendar() {
 
                 <RenderDay
                     currDate={currDate}
-                    onClick={handleClickDate}
+                    handleClickDate={handleClickDate}
                 />
 
             </div>
@@ -105,16 +157,18 @@ function Calendar() {
                 </div>
                 <div className={style.todo}>
                     <div className={style.todo_title}>TodoList</div>
-                    <div className={style.list}></div>
+                    <div className={style.list}>
 
+                    </div>
                     <div className={style.create}>
-                    <input className={style.create_input}></input>                                    
-                    <IoIosArrowDroprightCircle className={style.create_btn} onClick={""}></IoIosArrowDroprightCircle>
+                        <input className={style.create_input}></input>
+                        {/* <IoIosArrowDroprightCircle className={style.create_btn} onClick={""}></IoIosArrowDroprightCircle> */}
                     </div>
 
                 </div>
                 <div className={style.memo}>
                     <div className={style.memo_title}>Memo</div>
+                    <textarea type='text' placeholder="클릭 후 메모를 작성할 수 있습니다." spellCheck={false} className={style.memo_edit} onChange={handleEditMemo} value={currMemo}></textarea>
                 </div>
             </div>
         </div>
