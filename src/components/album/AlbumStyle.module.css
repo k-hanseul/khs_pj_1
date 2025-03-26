@@ -1,44 +1,49 @@
 .album {
     /* width: 100vw; */
-    width: 80vw;
+    /* width: 80vw; */
     margin: auto;
     /* background-color: #F4F4F2; */
     /* #f5f5f5; */
 }
 
 .photo_section_t1 {
-    /* background-color: rgb(91, 119, 161); */
+    /* background-color: burlywood; */
     /* width: 85%; */
-    width: 100%;
+    width: 95%;
     padding: 70px 0 70px 0;
-    display: inline-grid;
+    display: flex;
+    flex-direction: column;
+    display: inline-block;
+    /* display: inline-grid; */
     justify-items: center;
     align-items: center;
 }
 
-.photo_list {    
+.photo_list {
     display: grid;
-    justify-content: space-around;
-    grid-template-rows: repeat(2, 225px);
-    grid-template-columns: repeat(4, 225px);
+    /* width: 100%; */
+    justify-content: center;
+    grid-template-columns: repeat(4, 20%);
+    grid-template-rows: repeat(2, 50%);
     grid-gap: 2px;
-    /* padding-bottom: 20px; */
+    height: 500px;
+    width: 95%;
+    max-width: 1100px;
+    min-width: 900px;
 }
 
 .photo_item {
-    outline: 2px solid rgb(203 213 225);
+    /* max-width: 300px;    
+    min-height: 200px; */
+    /* width: 100%;
+    height: 100%; */
+    /* width: auto; */
+    /* width: 100%; */
+
+    outline: 2px solid #333;
     display: flex;
-    /* min-height: 70px; */
-    /* height: 70px; */
-    /* padding: 0 50px 0 50px; */
-    /* border-bottom: 1px solid rgba(100, 100, 100, .5); */
-    /* border: 1px solid rgba(100, 100, 100, .5); */
-    /* border: 4px solid rgba(20, 20, 20, 0.8); */
     padding: 10px 10px 10px 10px;
     border-collapse: collapse;
-    /* display: table;; */
-    /* margin: 10px 10px 10px 10px; */
-    /* margin: 10px; */
 }
 
 .photo_img {
@@ -49,9 +54,20 @@
     object-fit: cover;
 }
 
-/* .rc-pagination{
-    padding-top: 20px;
-} */
-.pagination {    
+.pagination {
     padding-top: 40px;
+
+}
+
+@media (max-width:768px) {
+    .photo_section_t1 {
+        padding: 50px 0 50px 0;
+    }
+
+    .photo_list {
+        grid-template-columns: repeat(2, 50%);
+        width: 95%;
+        max-width: initial;
+        min-width: initial;
+    }
 }

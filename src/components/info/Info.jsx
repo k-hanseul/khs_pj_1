@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import style from './InfoStyle.module.css'
+import { RxGithubLogo } from "react-icons/rx";
 
 function Info() {
     const introductions = [
@@ -15,19 +16,20 @@ function Info() {
         }
     ];
 
-    const getListState = () => {
-        var states = introductions.fill(true);
-        console.log("#### getListState states: " + JSON.stringify(states));
+    const getListState = () => {        
+        let states = new Array(introductions.length).fill(true);
+        // console.log("#### getListState states: " + JSON.stringify(states) + " / introductions: " + JSON.stringify(introductions));
         return states;
     };
 
-    const [listState, setListState] = useState(getListState);
     
     const handleShowDetail = (index) => {
         listState[index] = !listState[index];
         setListState([...listState]);
         console.log("#### handleShowDetail index: " + index + " / listState: " + JSON.stringify(listState));
     };
+
+    const [listState, setListState] = useState(getListState);
 
     return (
         <div className={style.info}>
@@ -53,12 +55,16 @@ function Info() {
                     </div>
                     <div className={style.profile_item}>
                         <span>이메일 ||
+                        {/* <a href="mailto:lkj2822@gmail.com">lkj2822@gmail.com</a> */}
                             <div>lkj2822@gmail.com</div>
                         </span>
                     </div>
                     <div className={style.profile_item}>
                         <span>깃허브 ||
-                            <div>https://github.com/k-hanseul</div>
+                            {/* <div>https://github.com/k-hanseul</div> */}
+                            <div><RxGithubLogo size={28} onClick={() => window.open("https://github.com/k-hanseul")}/>
+                            </div>
+
                         </span>
                     </div>
                 </div>
@@ -72,7 +78,8 @@ function Info() {
                         {/* <div className={style.introduction_title} onClick={""}> */}
                         <div className={style.introduction_title} onClick={() => handleShowDetail(index)}>
                             {/* {list.title} {listState[index] ? '▲' : '▼'} */}
-                            {list.title} {listState[index] ? '▲' : '▼'}
+                            {list.title}
+                            {listState[index] ? ' ▲' : ' ▼'}
                         </div>                        
                         {listState[index] && (
                             <div className={style.introduction_text} >
@@ -100,6 +107,7 @@ function Info() {
 
             <div className={style.info_section_t2}>
                 <div className={style.section_title}>경력</div>
+                <br></br>
                 <div className={style.career_item}>
                     <div className={style.career_item_title}>
                         <h2 style={{ margin: "0" }}>다이얼로그 스페이스</h2>
@@ -135,9 +143,9 @@ function Info() {
                         <h2 style={{ margin: "0" }}>세가 퍼블리싱 코리아</h2>
                         <p style={{ margin: "0", fontSize: "15px" }}>QA (사원) ∙ 2014 - 2017</p>
                     </div>
-                    <p className={style.career_item_text}>
+                    <div className={style.career_item_text}>
                         풋볼 매니저 온라인 QA
-                    </p>
+                    </div>
                 </div>
             </div>
 
@@ -192,6 +200,8 @@ function Info() {
                 </div>
             </div>
         </div>
+
+        
     )
 }
 

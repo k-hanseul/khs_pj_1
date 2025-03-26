@@ -2,24 +2,38 @@ import React, { useState, useEffect, useLayoutEffect } from 'react'
 import style from './AlbumStyle.module.css'
 import Pagination from 'rc-pagination';
 import "rc-pagination/assets/index.css";
+import { debounce } from 'lodash';
 
 function Album() {
+  const [width, setWidth] = useState(window.innerWidth);
+  const isMobile = width <= 768;
+
+  const handleResize = debounce(() => {
+    setWidth(window.innerWidth);
+  }, 1000);
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const [currPage, setPage] = useState(1);
   const [pagePhoto, setPagePhoto] = useState([]);
 
   var totalPhotos = [];
-  var pagePhotoCnt = 8;   // 한 페이지 당 노출되는 이미지 수
+  var pagePhotoCnt = isMobile ? 4 : 8;   // 한 페이지 당 노출되는 이미지 수
+  // var pagePhotoCnt = 6;   // 한 페이지 당 노출되는 이미지 수
 
   // 앨범 폴더 내 사진 체크
   function getPhotoList() {
     var photoFiles = require.context("../../../public/img/album", false, /\.(png|jpe?g|svg)$/);
     photoFiles.keys().forEach(function (key, i) {
       totalPhotos.push(photoFiles(key));
-      console.log("#### key: " + key + " / totalPhotos[key]: " + totalPhotos[i] + " / photoFiles[key]: " + photoFiles[key]);
+      // console.log("#### key: " + key + " / totalPhotos[key]: " + totalPhotos[i] + " / photoFiles[key]: " + photoFiles[key]);
     });
-    console.log("#### totalPhotos.length: " + totalPhotos.length + " / totalPhotos: " + JSON.stringify(totalPhotos));
-
+    // console.log("#### totalPhotos.length: " + totalPhotos.length + " / totalPhotos: " + JSON.stringify(totalPhotos));
     return totalPhotos.length;
   }
 
@@ -27,6 +41,7 @@ function Album() {
   useEffect(() => {
     var items = document.getElementsByClassName("photo_img");
     // console.log("#### items.length: " + items.length + " / items: " + JSON.stringify(items));
+    console.log("#### pagePhoto.length: " + pagePhoto.length + " / pagePhoto: " + JSON.stringify(pagePhoto));
 
     // items.forEach(function(item) {
     //   item.style.display = "none";
