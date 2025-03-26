@@ -1,7 +1,7 @@
 {
   "name": "khs_pj_1",
   "version": "0.1.0",
-  "homepage" : "https://k-hanseul/.github.io/khs_portfolio_web/",
+  "homepage" : "https://k-hanseul.github.io/khs_portfolio_web",
   "private": true,
   "browser": {
     "fs": false
