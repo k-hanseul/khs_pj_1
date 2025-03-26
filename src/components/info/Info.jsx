@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import style from './InfoStyle.module.css'
 import { RxGithubLogo } from "react-icons/rx";
+import { motion, AnimatePresence, easeIn } from 'framer-motion';
 
 function Info() {
     const introductions = [
@@ -16,13 +17,13 @@ function Info() {
         }
     ];
 
-    const getListState = () => {        
+    const getListState = () => {
         let states = new Array(introductions.length).fill(true);
         // console.log("#### getListState states: " + JSON.stringify(states) + " / introductions: " + JSON.stringify(introductions));
         return states;
     };
 
-    
+
     const handleShowDetail = (index) => {
         listState[index] = !listState[index];
         setListState([...listState]);
@@ -55,14 +56,14 @@ function Info() {
                     </div>
                     <div className={style.profile_item}>
                         <span>이메일 ||
-                        {/* <a href="mailto:lkj2822@gmail.com">lkj2822@gmail.com</a> */}
+                            {/* <a href="mailto:lkj2822@gmail.com">lkj2822@gmail.com</a> */}
                             <div>lkj2822@gmail.com</div>
                         </span>
                     </div>
                     <div className={style.profile_item}>
                         <span>깃허브 ||
                             {/* <div>https://github.com/k-hanseul</div> */}
-                            <div><RxGithubLogo size={28} onClick={() => window.open("https://github.com/k-hanseul")}/>
+                            <div><RxGithubLogo size={28} onClick={() => window.open("https://github.com/k-hanseul")} />
                             </div>
 
                         </span>
@@ -77,15 +78,27 @@ function Info() {
                     <li key={index}>
                         {/* <div className={style.introduction_title} onClick={""}> */}
                         <div className={style.introduction_title} onClick={() => handleShowDetail(index)}>
-                            {/* {list.title} {listState[index] ? '▲' : '▼'} */}
                             {list.title}
+                            {/* {" "}
+                            <motion.div>
+                            {"▲"}
+                            </motion.div>
+                             */}
                             {listState[index] ? ' ▲' : ' ▼'}
-                        </div>                        
-                        {listState[index] && (
-                            <div className={style.introduction_text} >
-                                {list.text}
-                            </div>
-                        )}
+                        </div>
+                        <AnimatePresence initial={false}>
+                            {listState[index] && (
+                                <motion.div
+                                    initial={{ y: -10, opacity: 0, height: 0 }}
+                                    animate={{ y: 0, opacity: 1, height: "auto" }}
+                                    exit={{ y: -10, opacity: 0, height: 0 }}
+                                    transition={{ duration: 0.25, ease: "easeOut", opacity: { duration: 0.15 } }}
+                                    className={style.introduction_text}  >
+                                    {list.text}
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+
                         <br></br>
                     </li>
                 ))}
@@ -201,7 +214,7 @@ function Info() {
             </div>
         </div>
 
-        
+
     )
 }
 
