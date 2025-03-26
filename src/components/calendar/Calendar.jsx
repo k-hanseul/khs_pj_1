@@ -3,6 +3,7 @@ import style from './CalendarStyle.module.css'
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek, format, addDays, isSaturday, isSunday, addMonths, subMonths } from "date-fns";
 import { FaCaretLeft, FaCaretRight } from "react-icons/fa6";
 import { IoIosArrowDroprightCircle, IoMdSquareOutline, IoMdCheckbox, IoMdCreate, IoMdClose } from "react-icons/io";
+import { PiListBold, PiListHeartBold, PiNoteBold } from "react-icons/pi";
 
 // 달력 일자 표기
 const RenderDay = ({ currDate, handleClickDate }) => {
@@ -26,6 +27,19 @@ const RenderDay = ({ currDate, handleClickDate }) => {
         return localMemo ? true : false;
     }
 
+    // 날짜에 투두가 있는지 체크
+    function isDayTodo(date) {
+        let type = 0;
+        let key = "TODO_" + format(date, 'yyyy-MM-dd');
+        const localTodo = localStorage.getItem(key);
+        // if (localTodo) {
+        //     type = JSON.parse(localTodo).includes((t, i) => !t.isCompleted) ? 1 : 2;
+        // }        
+        // console.log("#### isDayTodo key: " + key + " / localTodo: " + localTodo + " / type: " + type);
+        // return type;
+        return localTodo ? true : false;
+    }
+
     while (startDay <= endDay) {
         for (let i = 0; i < 8; i++) {
             let date = '';
@@ -44,7 +58,20 @@ const RenderDay = ({ currDate, handleClickDate }) => {
                                     ? "blue"
                                     : "#000"
                     }}>{i !== 0 ? format(startDay, 'dd') : ''}</div>
-                    <div>{i !== 0 && isDayMemo(date) ? 'Memo' : ''}</div>
+                    {/* <div>{i !== 0 && isDayMemo(date) ? 'Memo' : ''}</div> */}
+
+                    {
+                        i !== 0 && isDayMemo(date) && <PiNoteBold size={20} style={{ marginLeft: "auto" }} />
+                    }
+                                        {
+                        i !== 0 && isDayTodo(date) && <PiListBold size={20} style={{ marginLeft: "auto" }} />
+                    }
+                    {/* {
+                        i !== 0 && isDayTodo(date) === 1 && <PiListBold size={20} style={{ marginLeft: "auto" }} />
+                    }
+                    {
+                        i !== 0 && isDayTodo(date) === 2 && <PiListHeartBold size={20} style={{ marginLeft: "auto" }} />
+                    } */}
                 </div>
             )
             if (i !== 0) startDay = addDays(startDay, 1);
@@ -61,8 +88,9 @@ const RenderDay = ({ currDate, handleClickDate }) => {
 }
 
 function Calendar() {
-    const [currDate, setCurrDate] = useState(new Date());
     const week = ["*", "월", "화", "수", "목", "금", "토", "일"];
+
+    const [currDate, setCurrDate] = useState(new Date());
 
     // 기준 날짜 변경
     const handleClickDate = (day) => {
@@ -80,6 +108,11 @@ function Calendar() {
         setCurrDate(addMonths(currDate, 1));
     };
 
+    const [currTodoValue, setCurrTodoValue] = useState('');
+    const handleEditTodoValue = (e) => {
+        setCurrTodoValue(e.target.value);
+    }
+
     const TODO_KEY = "TODO_" + format(currDate, 'yyyy-MM-dd');
     const [currTodoList, setCurrTodoList] = useState([]);
 
@@ -88,37 +121,47 @@ function Calendar() {
         const localTodo = localStorage.getItem(TODO_KEY);
         if (localTodo) t = JSON.parse(localTodo);
         setCurrTodoList(t);
-        console.log("#### getTodo TODO_KEY: " + TODO_KEY + " / t: " + t + " / localTodo: " + localTodo);
+        // console.log("#### getTodo TODO_KEY: " + TODO_KEY + " / t: " + t + " / localTodo: " + localTodo);
     }
+
     const handleCreateTodo = () => {
         // console.log("### handleCreateTodo currTodoValue: " + currTodoValue);
-
         if (currTodoValue === undefined || currTodoValue === null || currTodoValue === 0 || currTodoValue === '' || !currTodoValue.replace(/\s/g, '').length) {
             console.log("### handleCreateTodo null");
             return;
         }
         const newTodo = {
-            index: currTodoList.length,
             text: currTodoValue,
-            completed: false,
+            isCompleted: false,
         };
 
-        setCurrTodoList([...currTodoList, newTodo]);
+        let newList = [...currTodoList, newTodo];
+        setCurrTodoList(newList);
         setCurrTodoValue('');
-        // localStorage.setItem(TODO_KEY, JSON.stringify(currTodoList));
 
-        // console.log("### currTodoList: " + JSON.stringify(currTodoList));
-
-
+        localStorage.setItem(TODO_KEY, JSON.stringify(newList));
     }
-    function handleDeleteTodo() {
+    function handleCheckTodo(index) {
+        let newList = currTodoList.map((c, i) => ({
+            ...c,
+            isCompleted: index === i ? !c.isCompleted : c.isCompleted,
+        }));
+        // console.log("### handleCheckTodo currTodoList: " + JSON.stringify(currTodoList) + " / newList: " + JSON.stringify(newList));
+        setCurrTodoList(newList);
+        localStorage.setItem(TODO_KEY, JSON.stringify(newList));
+    }
+
+    function handleDeleteTodo(index) {
+        let newList = currTodoList.filter((c, i) => i !== index);
+        // console.log("### handleDeleteTodo currTodoList: " + JSON.stringify(currTodoList) + " / newList: " + JSON.stringify(newList));
+        setCurrTodoList(newList);
+        if (newList.length > 0) localStorage.setItem(TODO_KEY, JSON.stringify(newList));
+        else localStorage.removeItem(TODO_KEY);
     }
     function handleEditTodo() {
+
     }
 
-    const [currTodoValue, setCurrTodoValue] = useState('');
-    const handleEditTodoValue = (e) => {
-    }
     const MEMO_KEY = "MEMO_" + format(currDate, 'yyyy-MM-dd');
     const [currMemo, setCurrMemo] = useState('');
     function getMemo() {
@@ -158,20 +201,6 @@ function Calendar() {
         getTodo();
     }, [currDate]);
 
-    // useEffect(() => {
-    //     if (currMemo === undefined || currMemo === null || currMemo === 0 || currMemo === '' || !currMemo.replace(/\s/g, '').length) localStorage.removeItem(MEMO_KEY);
-    //     else localStorage.setItem(MEMO_KEY, currMemo);
-    // }, [currMemo]);
-
-    useEffect(() => {
-        console.log("#### useEffect 1 currTodoList: " + JSON.stringify(currTodoList));
-        // console.log("#### useEffect 2 currTodoList: " + currTodoList);
-    }, [currTodoList]);
-
-    // useEffect(() => {
-    //     console.log("#### useEffect currTodoValue: " + currTodoValue);
-    // }, [currTodoValue]);
-
     return (
         <div className={style.calendar}>
 
@@ -198,7 +227,7 @@ function Calendar() {
                 />
 
             </div>
-            
+
             <div className={style.calendar_section_t2}>
                 <div className={style.title}>
                     {format(currDate, "yyyy")}. {format(currDate, "M")}. {format(currDate, "dd")}
@@ -206,25 +235,29 @@ function Calendar() {
                 <div className={style.todo}>
                     <div className={style.todo_title}>TodoList</div>
                     <div className={style.list}>
-                    {currTodoList.length}
-                    {
-                        currTodoList.map((t, i) => (
-                            <div>
-                                {t.index}
-                                {t.text}
-                                {t.completed}
-                            </div>
-                        ))
-                    }
+                        {
+                            currTodoList.map((t, i) => (
+                                <div className={style.item} key={i}>
+                                    {t.isCompleted ? <IoMdCheckbox size={20} onClick={() => handleCheckTodo(i)} /> : <IoMdSquareOutline size={20} onClick={() => handleCheckTodo(i)} />}
+                                    <div className={style.text} style={{ textDecoration: t.isCompleted && "#333 2px line-through" }}>{t.text}</div>
+                                    <div style={{ marginLeft: "auto" }}>
+                                        {/* <IoMdCreate size={20}/> */}
+                                        <IoMdClose size={20} style={{ paddingLeft: "5px" }} onClick={() => handleDeleteTodo(i)} />
+                                    </div>
+                                    {/* <IoMdCreate size={20} style={{marginLeft:"auto"}}/>
+                                    <IoMdClose size={20} style={{marginLeft:"auto"}}/> */}
+                                </div>
+                            ))
+                        }
                     </div>
                     <div className={style.create}>
-                        <input className={style.create_input} placeholder="투두 리스트 항목을 작성할 수 있습니다." value={currTodoValue} onChange={handleEditTodoValue}></input>                                                
+                        <input className={style.create_input} placeholder="투두 리스트 항목을 작성할 수 있습니다." value={currTodoValue} onChange={handleEditTodoValue}></input>
                         <IoIosArrowDroprightCircle className={style.create_btn} onClick={handleCreateTodo}></IoIosArrowDroprightCircle>
                     </div>
                 </div>
                 <div className={style.memo}>
                     <div className={style.memo_title}>Memo</div>
-                    <textarea type='text' placeholder="클릭 후 메모를 작성할 수 있습니다." spellCheck={false} className={style.memo_edit} onChange={handleEditMemo} value={currMemo}></textarea>
+                    <textarea type='text' placeholder="클릭 후 메모를 작성할 수 있습니다." spellCheck={false} className={style.memo_text} onChange={handleEditMemo} value={currMemo}></textarea>
                 </div>
             </div>
         </div>
