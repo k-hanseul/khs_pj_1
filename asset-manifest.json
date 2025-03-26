@@ -1,29 +1,29 @@
 {
   "files": {
-    "main.css": "/.github.io/khs_portfolio_web/static/css/main.3437261d.css",
-    "main.js": "/.github.io/khs_portfolio_web/static/js/main.e18c03d4.js",
-    "static/js/845.6649a1ea.chunk.js": "/.github.io/khs_portfolio_web/static/js/845.6649a1ea.chunk.js",
-    "static/media/1.jpg": "/.github.io/khs_portfolio_web/static/media/1.59de0aa490b554a8260a.jpg",
-    "static/media/7.jpg": "/.github.io/khs_portfolio_web/static/media/7.24670756d545c672d39f.jpg",
-    "static/media/3.jpg": "/.github.io/khs_portfolio_web/static/media/3.083bc2a36a2c843e1f85.jpg",
-    "static/media/4.jpg": "/.github.io/khs_portfolio_web/static/media/4.67d5a802c6dce537363c.jpg",
-    "static/media/2.jpg": "/.github.io/khs_portfolio_web/static/media/2.d8d943ac1483542713cd.jpg",
-    "static/media/8.jpg": "/.github.io/khs_portfolio_web/static/media/8.f013a2bc8a4d19f59ba7.jpg",
-    "static/media/12.jpg": "/.github.io/khs_portfolio_web/static/media/12.833652daa6666f54fad7.jpg",
-    "static/media/9.jpg": "/.github.io/khs_portfolio_web/static/media/9.67a486739df34fc17eae.jpg",
-    "static/media/13.jpg": "/.github.io/khs_portfolio_web/static/media/13.e50db074dce080bb3c15.jpg",
-    "static/media/11.jpg": "/.github.io/khs_portfolio_web/static/media/11.c3fee9e163465ed9e7fd.jpg",
-    "static/media/10.jpg": "/.github.io/khs_portfolio_web/static/media/10.01fdd255797170cbfcb7.jpg",
-    "static/media/0.jpg": "/.github.io/khs_portfolio_web/static/media/0.dcb695fb9be92989e542.jpg",
-    "static/media/6.jpg": "/.github.io/khs_portfolio_web/static/media/6.e159b710e360e3b0f3e5.jpg",
-    "static/media/5.jpg": "/.github.io/khs_portfolio_web/static/media/5.2ee55d24e6cd5a02d949.jpg",
-    "index.html": "/.github.io/khs_portfolio_web/index.html",
-    "main.3437261d.css.map": "/.github.io/khs_portfolio_web/static/css/main.3437261d.css.map",
-    "main.e18c03d4.js.map": "/.github.io/khs_portfolio_web/static/js/main.e18c03d4.js.map",
-    "845.6649a1ea.chunk.js.map": "/.github.io/khs_portfolio_web/static/js/845.6649a1ea.chunk.js.map"
+    "main.css": "/khs_portfolio_web/static/css/main.3437261d.css",
+    "main.js": "/khs_portfolio_web/static/js/main.10e55283.js",
+    "static/js/845.6649a1ea.chunk.js": "/khs_portfolio_web/static/js/845.6649a1ea.chunk.js",
+    "static/media/1.jpg": "/khs_portfolio_web/static/media/1.59de0aa490b554a8260a.jpg",
+    "static/media/7.jpg": "/khs_portfolio_web/static/media/7.24670756d545c672d39f.jpg",
+    "static/media/3.jpg": "/khs_portfolio_web/static/media/3.083bc2a36a2c843e1f85.jpg",
+    "static/media/4.jpg": "/khs_portfolio_web/static/media/4.67d5a802c6dce537363c.jpg",
+    "static/media/2.jpg": "/khs_portfolio_web/static/media/2.d8d943ac1483542713cd.jpg",
+    "static/media/8.jpg": "/khs_portfolio_web/static/media/8.f013a2bc8a4d19f59ba7.jpg",
+    "static/media/12.jpg": "/khs_portfolio_web/static/media/12.833652daa6666f54fad7.jpg",
+    "static/media/9.jpg": "/khs_portfolio_web/static/media/9.67a486739df34fc17eae.jpg",
+    "static/media/13.jpg": "/khs_portfolio_web/static/media/13.e50db074dce080bb3c15.jpg",
+    "static/media/11.jpg": "/khs_portfolio_web/static/media/11.c3fee9e163465ed9e7fd.jpg",
+    "static/media/10.jpg": "/khs_portfolio_web/static/media/10.01fdd255797170cbfcb7.jpg",
+    "static/media/0.jpg": "/khs_portfolio_web/static/media/0.dcb695fb9be92989e542.jpg",
+    "static/media/6.jpg": "/khs_portfolio_web/static/media/6.e159b710e360e3b0f3e5.jpg",
+    "static/media/5.jpg": "/khs_portfolio_web/static/media/5.2ee55d24e6cd5a02d949.jpg",
+    "index.html": "/khs_portfolio_web/index.html",
+    "main.3437261d.css.map": "/khs_portfolio_web/static/css/main.3437261d.css.map",
+    "main.10e55283.js.map": "/khs_portfolio_web/static/js/main.10e55283.js.map",
+    "845.6649a1ea.chunk.js.map": "/khs_portfolio_web/static/js/845.6649a1ea.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.3437261d.css",
-    "static/js/main.e18c03d4.js"
+    "static/js/main.10e55283.js"
   ]
 }
