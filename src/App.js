@@ -8,7 +8,7 @@ import Calendar from './components/calendar/Calendar';
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Header/>
       <Routes>
             <Route path="/" element={<Info />} />
