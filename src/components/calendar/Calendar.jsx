@@ -237,7 +237,7 @@ function Calendar() {
                     <div className={style.list}>
                         {
                             currTodoList.map((t, i) => (
-                                <div className={style.item} key={i}>
+                                <div className={style.item} key={i} style={{ display: "flex" }}>
                                     {t.isCompleted ? <IoMdCheckbox size={20} onClick={() => handleCheckTodo(i)} /> : <IoMdSquareOutline size={20} onClick={() => handleCheckTodo(i)} />}
                                     <div className={style.text} style={{ textDecoration: t.isCompleted && "#333 2px line-through" }}>{t.text}</div>
                                     <div style={{ marginLeft: "auto" }}>
@@ -257,7 +257,7 @@ function Calendar() {
                 </div>
                 <div className={style.memo}>
                     <div className={style.memo_title}>Memo</div>
-                    <textarea type='text' placeholder="클릭 후 메모를 작성할 수 있습니다." spellCheck={false} className={style.memo_text} onChange={handleEditMemo} value={currMemo}></textarea>
+                    <textarea type='text' placeholder="클릭 후 메모를 작성할 수 있습니다." spellCheck={false} className={style.memo_text} onChange={handleEditMemo} value={currMemo} style={{ padding: "10px" }} ></textarea>
                 </div>
             </div>
         </div>
