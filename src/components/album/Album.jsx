@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react'
-import style from './AlbumStyle.module.css'
 import Pagination from 'rc-pagination';
 import "rc-pagination/assets/index.css";
 import { debounce } from 'lodash';
+import style from './AlbumStyle.module.css'
 
 function Album() {
   const [width, setWidth] = useState(window.innerWidth);

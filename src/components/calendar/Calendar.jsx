@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react'
-import style from './CalendarStyle.module.css'
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek, format, addDays, isSaturday, isSunday, addMonths, subMonths } from "date-fns";
 import { FaCaretLeft, FaCaretRight } from "react-icons/fa6";
 import { IoIosArrowDroprightCircle, IoMdSquareOutline, IoMdCheckbox, IoMdCreate, IoMdClose } from "react-icons/io";
 import { PiListBold, PiListHeartBold, PiNoteBold } from "react-icons/pi";
+import style from './CalendarStyle.module.css'
 
 // 달력 일자 표기
 const RenderDay = ({ currDate, handleClickDate }) => {
@@ -251,7 +251,7 @@ function Calendar() {
                         }
                     </div>
                     <div className={style.create}>
-                        <input className={style.create_input} placeholder="투두 리스트 항목을 작성할 수 있습니다." value={currTodoValue} onChange={handleEditTodoValue}></input>
+                        <input className={style.create_input} placeholder="클릭 후 투두 리스트 항목을 작성할 수 있습니다." value={currTodoValue} onChange={handleEditTodoValue}></input>
                         <IoIosArrowDroprightCircle className={style.create_btn} onClick={handleCreateTodo}></IoIosArrowDroprightCircle>
                     </div>
                 </div>

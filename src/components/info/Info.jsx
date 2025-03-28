@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import style from './InfoStyle.module.css'
 import { RxGithubLogo } from "react-icons/rx";
 import { motion, AnimatePresence, easeIn } from 'framer-motion';
+import style from './InfoStyle.module.css'
 
 function Info() {
     const introductions = [
