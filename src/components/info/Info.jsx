@@ -35,7 +35,7 @@ function Info() {
     return (
         <div className={style.info}>
             <div className={style.info_section_t1}>
-                <img className={style.profile_img} src={'img/seul_.jpg'} alt="profile_img" />
+                <img className={style.profile_img} src={process.env.PUBLIC_URL + '/img/seul_.jpg'} alt="profile_img" />
                 <div className={style.profile_list}>
                     <div className={style.profile_item}>
                         <span>이름 ||
