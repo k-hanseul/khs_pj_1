@@ -23,7 +23,6 @@ function Info() {
         return states;
     };
 
-
     const handleShowDetail = (index) => {
         listState[index] = !listState[index];
         setListState([...listState]);
