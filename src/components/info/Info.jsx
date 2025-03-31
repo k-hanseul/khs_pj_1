@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { RxGithubLogo } from "react-icons/rx";
 import { motion, AnimatePresence, easeIn } from 'framer-motion';
 import style from './InfoStyle.module.css'
@@ -31,9 +31,19 @@ function Info() {
 
     const [listState, setListState] = useState(getListState);
 
+    const scrollRef = useRef([]);
+    const handleClickScroll = (index) => {
+        scrollRef.current[index].style.scrollMargin = "80px";
+        // scrollRef.current[index].style.scrollPadding = "60px";
+        scrollRef.current[index].scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+        });
+    }
+
     return (
         <div className={style.info}>
-            <div className={style.info_section_t1}>
+            <div className={style.info_section_t1} ref={el => scrollRef.current[0] = el}>
                 <img className={style.profile_img} src={process.env.PUBLIC_URL + '/img/seul_.jpg'} alt="profile_img" />
                 <div className={style.profile_list}>
                     <div className={style.profile_item}>
@@ -72,7 +82,7 @@ function Info() {
 
             <div className={style.info_line}></div>
 
-            <div className={style.info_section_t2}>
+            <div className={style.info_section_t2} ref={el => scrollRef.current[1] = el}>
                 {introductions.map((list, index) => (
                     <li key={index}>
                         {/* <div className={style.introduction_title} onClick={""}> */}
@@ -105,7 +115,7 @@ function Info() {
 
             <div className={style.info_line}></div>
 
-            <div className={style.info_section_t2}>
+            <div className={style.info_section_t2} ref={el => scrollRef.current[2] = el}>
                 <div className={style.section_title}>교육</div>
                 <br></br>
                 {/* <div className={style.content_list}> */}
@@ -117,7 +127,7 @@ function Info() {
 
             <div className={style.info_line}></div>
 
-            <div className={style.info_section_t2}>
+            <div className={style.info_section_t2} ref={el => scrollRef.current[3] = el}>
                 <div className={style.section_title}>경력</div>
                 <br></br>
                 <div className={style.career_item}>
@@ -162,7 +172,7 @@ function Info() {
             </div>
 
             <div className={style.info_line}></div>
-            <div className={style.info_section_t2}>
+            <div className={style.info_section_t2} ref={el => scrollRef.current[4] = el}>
                 <div className={style.section_title}>프로젝트</div>
                 <br></br>
                 <div className={style.career_item}>
@@ -211,9 +221,26 @@ function Info() {
                     </p>
                 </div>
             </div>
+            <div className={style.info_navi}>
+                <div className={style.navi_list}>
+                    <div className={style.navi_item} onClick={() => { handleClickScroll(0) }}>
+                        프로필
+                    </div>
+                    <div className={style.navi_item} onClick={() => { handleClickScroll(1) }}>
+                        소개
+                    </div>
+                    <div className={style.navi_item} onClick={() => { handleClickScroll(2) }}>
+                        교육
+                    </div>
+                    <div className={style.navi_item} onClick={() => { handleClickScroll(3) }}>
+                        경력
+                    </div>
+                    <div className={style.navi_item} onClick={() => { handleClickScroll(4) }}>
+                        프로젝트
+                    </div>
+                </div>
+            </div>
         </div>
-
-
     )
 }
 
