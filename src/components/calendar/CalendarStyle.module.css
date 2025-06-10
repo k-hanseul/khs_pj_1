@@ -2,6 +2,7 @@
     width: 95vw;
     margin: auto;
     display: flex;
+    align-items: center;
 }
 
 .calendar_section_t1 {
@@ -59,6 +60,7 @@
         box-shadow: 0 0 0 2px rgb(68, 68, 68);
         text-align: left;
         display: grid;
+        cursor: pointer;
     }
 }
 
@@ -116,7 +118,7 @@
 
             .text {
                 padding-left: 10px;
-                font-size: 20px;
+                font-size: 15px;
             }
         }
 
@@ -142,6 +144,7 @@
             top: 50%;
             right: 5px;
             margin-top: -15px;
+            cursor: pointer;
         }
     }
 
@@ -218,5 +221,9 @@
             font-size: 25px;
             margin-bottom: 20px;
         }
+    }
+
+    .create_input {
+        font-size: 12px;
     }
 }

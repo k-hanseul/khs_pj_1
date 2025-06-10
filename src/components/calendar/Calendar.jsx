@@ -63,7 +63,7 @@ const RenderDay = ({ currDate, handleClickDate }) => {
                     {
                         i !== 0 && isDayMemo(date) && <PiNoteBold size={20} style={{ marginLeft: "auto" }} />
                     }
-                                        {
+                    {
                         i !== 0 && isDayTodo(date) && <PiListBold size={20} style={{ marginLeft: "auto" }} />
                     }
                     {/* {
@@ -158,9 +158,6 @@ function Calendar() {
         if (newList.length > 0) localStorage.setItem(TODO_KEY, JSON.stringify(newList));
         else localStorage.removeItem(TODO_KEY);
     }
-    function handleEditTodo() {
-
-    }
 
     const MEMO_KEY = "MEMO_" + format(currDate, 'yyyy-MM-dd');
     const [currMemo, setCurrMemo] = useState('');
@@ -206,9 +203,9 @@ function Calendar() {
 
             <div className={style.calendar_section_t1}>
                 <div className={style.calendar_header}>
-                    <FaCaretLeft size={35} onClick={handlePrevMonth} />
+                    <FaCaretLeft style={{ cursor: "pointer" }} size={35} onClick={handlePrevMonth} />
                     {format(currDate, "yyyy")}년 {format(currDate, "M")}월
-                    <FaCaretRight size={35} onClick={handleNextMonth} />
+                    <FaCaretRight style={{ cursor: "pointer" }} size={35} onClick={handleNextMonth} />
                 </div>
 
                 <div className={style.calendar_week}>
@@ -238,14 +235,11 @@ function Calendar() {
                         {
                             currTodoList.map((t, i) => (
                                 <div className={style.item} key={i} style={{ display: "flex" }}>
-                                    {t.isCompleted ? <IoMdCheckbox size={20} onClick={() => handleCheckTodo(i)} /> : <IoMdSquareOutline size={20} onClick={() => handleCheckTodo(i)} />}
+                                    {t.isCompleted ? <IoMdCheckbox size={20} style={{ cursor: "pointer" }} onClick={() => handleCheckTodo(i)} /> : <IoMdSquareOutline size={20} style={{ cursor: "pointer" }} onClick={() => handleCheckTodo(i)} />}
                                     <div className={style.text} style={{ textDecoration: t.isCompleted && "#333 2px line-through" }}>{t.text}</div>
                                     <div style={{ marginLeft: "auto" }}>
-                                        {/* <IoMdCreate size={20}/> */}
-                                        <IoMdClose size={20} style={{ paddingLeft: "5px" }} onClick={() => handleDeleteTodo(i)} />
+                                        <IoMdClose size={20} style={{ paddingLeft: "5px", cursor: "pointer" }} onClick={() => handleDeleteTodo(i)} />
                                     </div>
-                                    {/* <IoMdCreate size={20} style={{marginLeft:"auto"}}/>
-                                    <IoMdClose size={20} style={{marginLeft:"auto"}}/> */}
                                 </div>
                             ))
                         }

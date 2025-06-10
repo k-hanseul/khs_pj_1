@@ -113,6 +113,8 @@
     font-size: 30px;
     text-align: left;
     padding-bottom: 10px;
+    display: flex;
+    column-gap: 10px;
     /* display: grid;
     align-items: center;
     text-align: left;
@@ -121,11 +123,21 @@
 }
 
 .introduction_text {
-    font-size: 18px;
+    font-size: 17px;
     text-align: left;
-    white-space: pre-wrap;
-    text-indent: 20px;
-    line-height: 1.5;
+    text-indent: 15px;
+    line-height: 1.4;
+    padding-bottom: 5px;
+
+}
+
+.career_division {
+    font-size: 20px;
+    text-align: left;
+    text-decoration: underline;
+    text-decoration-style: dashed;
+    text-underline-offset: 8px;
+    text-indent: 10px;
 }
 
 .career_item {
@@ -153,6 +165,29 @@
     color: black;
 }
 
+.career_item_top {
+    border-left: 2px solid #141414;
+    font-weight: bold;
+    padding-left: 5px;
+    margin-bottom: 10px;
+    margin-left: -5px;
+}
+
+.career_item_btn {
+    width: 85px;
+    height: 30px;
+    background-color: #333;
+    border-radius: 20px;
+    color: white;
+    font-size: 15px;
+    margin-bottom: 10px;
+    margin-left: -5px;
+    cursor: pointer;
+}
+.career_item_btn:hover {
+    background-color: #444;
+ }
+ 
 .info_navi {
     position: sticky;
     bottom: 0;
@@ -250,12 +285,33 @@
         width: 100%;
     }
 
+    .career_item_top {
+        /* border-left: 2px solid #141414;
+        font-weight: bold; */
+        /* padding-left: 5px; */
+        width: 50%;
+        border-left: 2.5px solid #141414;
+        border-right: 2.5px solid #141414;
+        justify-self: center;
+        margin-bottom: 10px;
+        /* margin-left: -5px; */
+    }
+    
+    .career_item_btn {
+        justify-self: center;
+    }
+
     .info_navi {
         height: 35px;
     
+        .navi_list {
+            width: 95%;
+        }
+
         .navi_item {
             width: 100px;
-            font-size: 15px;
+            font-size: 14px;
+            cursor: pointer;
         }
     }
 }
